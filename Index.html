@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>handmade by umra</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fbf8f4;color:#302925;font-family:Arial,sans-serif}
+header{padding:20px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd4cb;position:sticky;top:0;background:#fbf8f4;z-index:5}
+.logo{font:24px Georgia,serif}.logo i{font-style:italic}nav a{margin-left:18px;text-decoration:none;color:#302925}
+.hero{padding:80px 8%;background:#f1e8df;min-height:500px;display:flex;align-items:center}
+.hero h1{font:55px Georgia,serif;line-height:1;margin:0 0 20px}.hero em{font-style:italic}
+.hero p{max-width:480px;line-height:1.7;color:#756b64}.btn{display:inline-block;background:#302925;color:white;border:0;border-radius:30px;padding:14px 22px;margin-top:15px;cursor:pointer;text-decoration:none}
+section.shop{padding:70px 7%}.shop h2,.about h2{font:40px Georgia,serif}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.filters button{border:1px solid #d8cec5;background:none;border-radius:30px;padding:9px 15px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.card{cursor:pointer}.pic{aspect-ratio:1;background:#eadfd4;display:flex;align-items:center;justify-content:center;font:65px Georgia;color:#9b8472;border-radius:4px}
+.card h3{font:18px Georgia,serif;margin:12px 0 5px}.price{color:#756b64;font-size:13px}
+.about{margin:20px 7% 80px;padding:60px;background:#eee4da;line-height:1.8}.about p{max-width:650px;color:#756b64}
+footer{padding:50px 7%;border-top:1px solid #ddd4cb}.cart{position:fixed;right:0;top:0;width:min(420px,100%);height:100%;background:#fff;z-index:20;padding:25px;box-shadow:-5px 0 25px #0002;display:none;overflow:auto}.cart.open{display:block}
+.cart h2{font:32px Georgia,serif}.item{padding:15px 0;border-bottom:1px solid #ddd;display:flex;justify-content:space-between}.close{float:right;border:0;background:none;font-size:25px}
+input,textarea{width:100%;padding:12px;margin:7px 0;border:1px solid #ddd;border-radius:8px}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:44px}.hero{padding:55px 7%}.about{padding:35px 25px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">handmade <i>by umra</i></div>
+<nav><a href="#shop">Shop</a><a href="#about">About</a><a href="#" onclick="openCart()">🛍️ <b id="count">0</b></a></nav>
+</header>
+
+<section class="hero">
+<div>
+<p>HANDMADE • SOFT • SPECIAL</p>
+<h1>Little pieces of<br><em>handmade happiness.</em></h1>
+<p>Thoughtfully knotted macramé pieces made by hand for your home, your everyday life and your favourite people.</p>
+<a class="btn" href="#shop">Shop the collection</a>
+</div>
+</section>
+
+<section id="shop" class="shop">
+<p>SHOP</p><h2>Find your little favourite ♡</h2>
+<div class="filters">
+<button onclick="show('all')">All</button><button onclick="show('bags')">Bags</button>
+<button onclick="show('keychains')">Keychains</button><button onclick="show('home')">Home</button>
+<button onclick="show('charms')">Charms</button>
+</div>
+<div id="products" class="grid"></div>
+</section>
+
+<section id="about" class="about">
+<p>ABOUT HANDMADE BY UMRA</p><h2>Handmade, not mass-made.</h2>
+<p>Every piece is made by hand, one knot at a time. Thoughtful details, soft aesthetics and handmade pieces made with love.</p>
+</section>
+
+<footer>
+<div class="logo">handmade <i>by umra</i></div>
+<p>Made slowly with love ♡</p>
+</footer>
+
+<div id="cart" class="cart">
+<button class="close" onclick="closeCart()">×</button>
+<h2>Your bag</h2>
+<div id="items"></div>
+<h3>Total: ₹<span id="total">0</span></h3>
+<input id="name" placeholder="Your name">
+<input id="phone" placeholder="Phone number">
+<textarea id="address" placeholder="Delivery address"></textarea>
+<button class="btn" onclick="order()">Order on WhatsApp</button>
+</div>
+
+<script>
+const products=[
+["Daisy Dream Bag",499,"bags","✿"],["Mini Clutch",399,"bags","♡"],
+["Daisy Keychain",149,"keychains","✿"],["Phone Lanyard",149,"keychains","⌁"],
+["Macramé Coaster",120,"home","○"],["Plant Hanger",299,"home","♧"],
+["Heart Car Charm",149,"charms","♡"],["Bottle Holder",299,"home","⌇"]
+];
+let cart=[];
+function show(cat="all"){
+let a=products.filter(x=>cat=="all"||x[2]==cat);
+document.getElementById("products").innerHTML=a.map((p,i)=>
+`<div class="card" onclick="add(${products.indexOf(p)})"><div class="pic">${p[3]}</div><h3>${p[0]}</h3><div class="price">₹${p[1]} · Add to bag</div></div>`).join("");
+}
+function add(i){let x=cart.find(a=>a[0]==i);x?x[1]++:cart.push([i,1]);render();openCart()}
+function render(){
+document.getElementById("count").textContent=cart.reduce((a,x)=>a+x[1],0);
+let total=0;
+document.getElementById("items").innerHTML=cart.map(x=>{let p=products[x[0]];total+=p[1]*x[1];return `<div class="item">${p[0]} × ${x[1]}<b>₹${p[1]*x[1]}</b></div>`}).join("")||"<p>Your bag is empty ♡</p>";
+document.getElementById("total").textContent=total;
+}
+function openCart(){document.getElementById("cart").classList.add("open")}
+function closeCart(){document.getElementById("cart").classList.remove("open")}
+function order(){
+if(!cart.length)return alert("Your bag is empty.");
+let n=document.getElementById("name").value,p=document.getElementById("phone").value,a=document.getElementById("address").value;
+if(!n||!p||!a)return alert("Please fill your details.");
+let text="Hi handmade by umra! I want to order:%0A"+cart.map(x=>products[x[0]][0]+" × "+x[1]).join("%0A")+"%0A%0AName: "+n+"%0APhone: "+p+"%0AAddress: "+a;
+window.open("https://wa.me/?text="+text,"_blank");
+}
+show();render();
+</script>
+</body>
+</html>
