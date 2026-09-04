@@ -1,103 +1,830 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>handmade by umra</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#fbf8f4;color:#302925;font-family:Arial,sans-serif}
-header{padding:20px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd4cb;position:sticky;top:0;background:#fbf8f4;z-index:5}
-.logo{font:24px Georgia,serif}.logo i{font-style:italic}nav a{margin-left:18px;text-decoration:none;color:#302925}
-.hero{padding:80px 8%;background:#f1e8df;min-height:500px;display:flex;align-items:center}
-.hero h1{font:55px Georgia,serif;line-height:1;margin:0 0 20px}.hero em{font-style:italic}
-.hero p{max-width:480px;line-height:1.7;color:#756b64}.btn{display:inline-block;background:#302925;color:white;border:0;border-radius:30px;padding:14px 22px;margin-top:15px;cursor:pointer;text-decoration:none}
-section.shop{padding:70px 7%}.shop h2,.about h2{font:40px Georgia,serif}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.filters button{border:1px solid #d8cec5;background:none;border-radius:30px;padding:9px 15px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.card{cursor:pointer}.pic{aspect-ratio:1;background:#eadfd4;display:flex;align-items:center;justify-content:center;font:65px Georgia;color:#9b8472;border-radius:4px}
-.card h3{font:18px Georgia,serif;margin:12px 0 5px}.price{color:#756b64;font-size:13px}
-.about{margin:20px 7% 80px;padding:60px;background:#eee4da;line-height:1.8}.about p{max-width:650px;color:#756b64}
-footer{padding:50px 7%;border-top:1px solid #ddd4cb}.cart{position:fixed;right:0;top:0;width:min(420px,100%);height:100%;background:#fff;z-index:20;padding:25px;box-shadow:-5px 0 25px #0002;display:none;overflow:auto}.cart.open{display:block}
-.cart h2{font:32px Georgia,serif}.item{padding:15px 0;border-bottom:1px solid #ddd;display:flex;justify-content:space-between}.close{float:right;border:0;background:none;font-size:25px}
-input,textarea{width:100%;padding:12px;margin:7px 0;border:1px solid #ddd;border-radius:8px}
-@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:44px}.hero{padding:55px 7%}.about{padding:35px 25px}}
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:#fbf8f4;
+color:#302925;
+font-family:Arial,sans-serif;
+}
+
+header{
+padding:18px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #ddd4cb;
+position:sticky;
+top:0;
+background:#fbf8f4;
+z-index:10;
+}
+
+.logo{
+font:25px Georgia,serif;
+}
+
+.logo i{
+font-style:italic;
+}
+
+nav a{
+margin-left:18px;
+text-decoration:none;
+color:#302925;
+font-size:14px;
+}
+
+.hero{
+padding:85px 8%;
+background:#f1e8df;
+min-height:500px;
+display:flex;
+align-items:center;
+}
+
+.hero small{
+letter-spacing:2px;
+color:#756b64;
+}
+
+.hero h1{
+font:55px Georgia,serif;
+line-height:1.05;
+margin:18px 0;
+}
+
+.hero h1 em{
+font-style:italic;
+}
+
+.hero p{
+max-width:520px;
+line-height:1.8;
+color:#756b64;
+}
+
+.btn{
+display:inline-block;
+background:#302925;
+color:white;
+border:0;
+border-radius:30px;
+padding:14px 24px;
+margin-top:15px;
+cursor:pointer;
+text-decoration:none;
+}
+
+.shop{
+padding:70px 7%;
+}
+
+.shop h2,
+.about h2{
+font:40px Georgia,serif;
+margin-top:10px;
+}
+
+.filters{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin:25px 0;
+}
+
+.filters button{
+border:1px solid #d8cec5;
+background:#fffaf6;
+color:#302925;
+border-radius:30px;
+padding:10px 17px;
+cursor:pointer;
+}
+
+.filters button:hover{
+background:#eee4da;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+}
+
+.card{
+background:#fff;
+padding-bottom:18px;
+cursor:pointer;
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+}
+
+.pic{
+aspect-ratio:1;
+background:#eadfd4;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:65px;
+color:#9b8472;
+}
+
+.card h3{
+font:18px Georgia,serif;
+margin:14px 14px 5px;
+}
+
+.price{
+color:#756b64;
+font-size:14px;
+margin:0 14px;
+}
+
+.add{
+display:block;
+margin:12px 14px 0;
+padding:9px 12px;
+border:1px solid #302925;
+border-radius:20px;
+background:white;
+cursor:pointer;
+}
+
+.add:hover{
+background:#302925;
+color:white;
+}
+
+.about{
+margin:20px 7% 80px;
+padding:60px;
+background:#eee4da;
+line-height:1.8;
+}
+
+.about p{
+max-width:650px;
+color:#756b64;
+}
+
+footer{
+padding:50px 7%;
+border-top:1px solid #ddd4cb;
+}
+
+.cart{
+position:fixed;
+right:0;
+top:0;
+width:min(430px,100%);
+height:100%;
+background:#fff;
+z-index:30;
+padding:25px;
+box-shadow:-5px 0 25px #0002;
+display:none;
+overflow:auto;
+}
+
+.cart.open{
+display:block;
+}
+
+.cart h2{
+font:32px Georgia,serif;
+}
+
+.close{
+float:right;
+border:0;
+background:none;
+font-size:30px;
+cursor:pointer;
+}
+
+.item{
+padding:15px 0;
+border-bottom:1px solid #ddd;
+}
+
+.itemtop{
+display:flex;
+justify-content:space-between;
+gap:10px;
+}
+
+.qty{
+margin-top:8px;
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.qty button{
+border:1px solid #ccc;
+background:white;
+border-radius:50%;
+width:28px;
+height:28px;
+cursor:pointer;
+}
+
+.remove{
+border:0;
+background:none;
+color:#9b6258;
+cursor:pointer;
+}
+
+input,
+textarea{
+width:100%;
+padding:13px;
+margin:7px 0;
+border:1px solid #ddd;
+border-radius:8px;
+font-family:Arial;
+}
+
+.empty{
+color:#756b64;
+padding:20px 0;
+}
+
+@media(max-width:900px){
+.grid{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+@media(max-width:600px){
+header{
+padding:15px 5%;
+}
+
+.logo{
+font-size:21px;
+}
+
+nav a{
+margin-left:9px;
+font-size:13px;
+}
+
+.hero{
+padding:60px 7%;
+min-height:450px;
+}
+
+.hero h1{
+font-size:43px;
+}
+
+.shop{
+padding:55px 5%;
+}
+
+.shop h2,
+.about h2{
+font-size:32px;
+}
+
+.grid{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.card h3{
+font-size:16px;
+margin-left:10px;
+}
+
+.price{
+margin-left:10px;
+}
+
+.add{
+margin-left:10px;
+margin-right:10px;
+}
+
+.about{
+margin:10px 5% 55px;
+padding:35px 25px;
+}
+}
 </style>
 </head>
+
 <body>
 
 <header>
 <div class="logo">handmade <i>by umra</i></div>
-<nav><a href="#shop">Shop</a><a href="#about">About</a><a href="#" onclick="openCart()">🛍️ <b id="count">0</b></a></nav>
+
+<nav>
+<a href="#shop">Shop</a>
+<a href="#about">About</a>
+<a href="#" onclick="openCart();return false;">
+🛍️ <b id="count">0</b>
+</a>
+</nav>
 </header>
 
+
 <section class="hero">
+
 <div>
-<p>HANDMADE • SOFT • SPECIAL</p>
-<h1>Little pieces of<br><em>handmade happiness.</em></h1>
-<p>Thoughtfully knotted macramé pieces made by hand for your home, your everyday life and your favourite people.</p>
-<a class="btn" href="#shop">Shop the collection</a>
+
+<small>HANDMADE • SOFT • SPECIAL</small>
+
+<h1>
+Little pieces of<br>
+<em>handmade happiness.</em>
+</h1>
+
+<p>
+Thoughtfully knotted macramé pieces made by hand
+for your home, your everyday life and your favourite people.
+</p>
+
+<a class="btn" href="#shop">
+Shop the collection
+</a>
+
 </div>
+
 </section>
+
 
 <section id="shop" class="shop">
-<p>SHOP</p><h2>Find your little favourite ♡</h2>
+
+<p>SHOP</p>
+
+<h2>Find your little favourite ♡</h2>
+
 <div class="filters">
-<button onclick="show('all')">All</button><button onclick="show('bags')">Bags</button>
-<button onclick="show('keychains')">Keychains</button><button onclick="show('home')">Home</button>
-<button onclick="show('charms')">Charms</button>
+
+<button onclick="show('all')">All</button>
+
+<button onclick="show('bags')">
+Bags
+</button>
+
+<button onclick="show('keychains')">
+Keychains
+</button>
+
+<button onclick="show('home')">
+Home
+</button>
+
+<button onclick="show('charms')">
+Charms
+</button>
+
 </div>
+
 <div id="products" class="grid"></div>
+
 </section>
+
 
 <section id="about" class="about">
-<p>ABOUT HANDMADE BY UMRA</p><h2>Handmade, not mass-made.</h2>
-<p>Every piece is made by hand, one knot at a time. Thoughtful details, soft aesthetics and handmade pieces made with love.</p>
+
+<p>ABOUT HANDMADE BY UMRA</p>
+
+<h2>Handmade, not mass-made.</h2>
+
+<p>
+Every piece is made by hand, one knot at a time.
+Thoughtful details, soft aesthetics and little handmade
+pieces made with love.
+</p>
+
+<p>
+From cute everyday accessories to home décor,
+each creation is made to add a little warmth to your world.
+</p>
+
 </section>
 
-<footer>
-<div class="logo">handmade <i>by umra</i></div>
-<p>Made slowly with love ♡</p>
-</footer>
 
-<div id="cart" class="cart">
-<button class="close" onclick="closeCart()">×</button>
-<h2>Your bag</h2>
-<div id="items"></div>
-<h3>Total: ₹<span id="total">0</span></h3>
-<input id="name" placeholder="Your name">
-<input id="phone" placeholder="Phone number">
-<textarea id="address" placeholder="Delivery address"></textarea>
-<button class="btn" onclick="order()">Order on WhatsApp</button>
+<footer>
+
+<div class="logo">
+handmade <i>by umra</i>
 </div>
 
+<p>Made slowly with love ♡</p>
+
+</footer>
+
+
+<div id="cart" class="cart">
+
+<button class="close" onclick="closeCart()">×</button>
+
+<h2>Your bag ♡</h2>
+
+<div id="items"></div>
+
+<h3>
+Total: ₹<span id="total">0</span>
+</h3>
+
+<hr>
+
+<h3>Your details</h3>
+
+<input id="name" placeholder="Your name">
+
+<input id="phone" placeholder="Phone number">
+
+<textarea id="address" rows="4"
+placeholder="Delivery address"></textarea>
+
+<button class="btn" onclick="order()">
+Order on WhatsApp
+</button>
+
+</div>
+
+
 <script>
-const products=[
-["Daisy Dream Bag",499,"bags","✿"],["Mini Clutch",399,"bags","♡"],
-["Daisy Keychain",149,"keychains","✿"],["Phone Lanyard",149,"keychains","⌁"],
-["Macramé Coaster",120,"home","○"],["Plant Hanger",299,"home","♧"],
-["Heart Car Charm",149,"charms","♡"],["Bottle Holder",299,"home","⌇"]
+
+const products = [
+
+{
+name:"Daisy Dream Bag",
+price:499,
+category:"bags",
+icon:"✿"
+},
+
+{
+name:"Macramé Mini Clutch",
+price:399,
+category:"bags",
+icon:"♡"
+},
+
+{
+name:"Daisy Keychain",
+price:149,
+category:"keychains",
+icon:"✿"
+},
+
+{
+name:"Phone Lanyard",
+price:149,
+category:"keychains",
+icon:"⌁"
+},
+
+{
+name:"Macramé Coaster",
+price:120,
+category:"home",
+icon:"○"
+},
+
+{
+name:"Plant Hanger",
+price:299,
+category:"home",
+icon:"♧"
+},
+
+{
+name:"Heart Car Charm",
+price:149,
+category:"charms",
+icon:"♡"
+},
+
+{
+name:"Macramé Bottle Holder",
+price:299,
+category:"home",
+icon:"⌇"
+},
+
+{
+name:"Mirror Wall Hanging",
+price:499,
+category:"home",
+icon:"◌"
+},
+
+{
+name:"Macramé Hairband",
+price:120,
+category:"keychains",
+icon:"✿"
+},
+
+{
+name:"Scrunchie",
+price:99,
+category:"keychains",
+icon:"❀"
+},
+
+{
+name:"Flower Pot Hanger",
+price:349,
+category:"home",
+icon:"♧"
+}
+
 ];
+
+
 let cart=[];
-function show(cat="all"){
-let a=products.filter(x=>cat=="all"||x[2]==cat);
-document.getElementById("products").innerHTML=a.map((p,i)=>
-`<div class="card" onclick="add(${products.indexOf(p)})"><div class="pic">${p[3]}</div><h3>${p[0]}</h3><div class="price">₹${p[1]} · Add to bag</div></div>`).join("");
+
+
+function show(category="all"){
+
+let list=products.filter(
+p=>category==="all" || p.category===category
+);
+
+document.getElementById("products").innerHTML=
+
+list.map(p=>{
+
+let index=products.indexOf(p);
+
+return `
+
+<div class="card">
+
+<div class="pic"
+onclick="add(${index})">
+${p.icon}
+</div>
+
+<h3>${p.name}</h3>
+
+<div class="price">
+₹${p.price}
+</div>
+
+<button class="add"
+onclick="add(${index})">
+Add to bag
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
 }
-function add(i){let x=cart.find(a=>a[0]==i);x?x[1]++:cart.push([i,1]);render();openCart()}
+
+
+function add(index){
+
+let existing=cart.find(
+item=>item.index===index
+);
+
+if(existing){
+
+existing.qty++;
+
+}else{
+
+cart.push({
+index:index,
+qty:1
+});
+
+}
+
+render();
+
+openCart();
+
+}
+
+
+function changeQty(index,amount){
+
+let item=cart.find(
+x=>x.index===index
+);
+
+if(!item)return;
+
+item.qty+=amount;
+
+if(item.qty<=0){
+
+cart=cart.filter(
+x=>x.index!==index
+);
+
+}
+
+render();
+
+}
+
+
+function removeItem(index){
+
+cart=cart.filter(
+x=>x.index!==index
+);
+
+render();
+
+}
+
+
 function render(){
-document.getElementById("count").textContent=cart.reduce((a,x)=>a+x[1],0);
+
+let count=cart.reduce(
+(sum,item)=>sum+item.qty,0
+);
+
+document.getElementById("count").textContent=count;
+
+
 let total=0;
-document.getElementById("items").innerHTML=cart.map(x=>{let p=products[x[0]];total+=p[1]*x[1];return `<div class="item">${p[0]} × ${x[1]}<b>₹${p[1]*x[1]}</b></div>`}).join("")||"<p>Your bag is empty ♡</p>";
+
+
+if(cart.length===0){
+
+document.getElementById("items").innerHTML=
+'<p class="empty">Your bag is empty ♡</p>';
+
+document.getElementById("total").textContent="0";
+
+return;
+
+}
+
+
+document.getElementById("items").innerHTML=
+
+cart.map(item=>{
+
+let p=products[item.index];
+
+let subtotal=p.price*item.qty;
+
+total+=subtotal;
+
+return `
+
+<div class="item">
+
+<div class="itemtop">
+
+<strong>${p.name}</strong>
+
+<strong>₹${subtotal}</strong>
+
+</div>
+
+<div class="qty">
+
+<button onclick="changeQty(${item.index},-1)">
+−
+</button>
+
+<span>${item.qty}</span>
+
+<button onclick="changeQty(${item.index},1)">
++
+</button>
+
+<button class="remove"
+onclick="removeItem(${item.index})">
+Remove
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+
 document.getElementById("total").textContent=total;
+
 }
-function openCart(){document.getElementById("cart").classList.add("open")}
-function closeCart(){document.getElementById("cart").classList.remove("open")}
+
+
+function openCart(){
+
+document.getElementById("cart")
+.classList.add("open");
+
+}
+
+
+function closeCart(){
+
+document.getElementById("cart")
+.classList.remove("open");
+
+}
+
+
 function order(){
-if(!cart.length)return alert("Your bag is empty.");
-let n=document.getElementById("name").value,p=document.getElementById("phone").value,a=document.getElementById("address").value;
-if(!n||!p||!a)return alert("Please fill your details.");
-let text="Hi handmade by umra! I want to order:%0A"+cart.map(x=>products[x[0]][0]+" × "+x[1]).join("%0A")+"%0A%0AName: "+n+"%0APhone: "+p+"%0AAddress: "+a;
-window.open("https://wa.me/?text="+text,"_blank");
+
+if(cart.length===0){
+
+alert("Your bag is empty.");
+
+return;
+
 }
-show();render();
+
+
+let name=
+document.getElementById("name").value.trim();
+
+let phone=
+document.getElementById("phone").value.trim();
+
+let address=
+document.getElementById("address").value.trim();
+
+
+if(!name || !phone || !address){
+
+alert("Please fill your name, phone number and address.");
+
+return;
+
+}
+
+
+let message=
+"Hi handmade by umra!%0A%0A"+
+"I want to place an order:%0A%0A";
+
+
+cart.forEach(item=>{
+
+let p=products[item.index];
+
+message+=
+"• "+p.name+
+" × "+item.qty+
+" = ₹"+(p.price*item.qty)+
+"%0A";
+
+});
+
+
+let total=cart.reduce(
+(sum,item)=>
+sum+products[item.index].price*item.qty,
+0
+);
+
+
+message+=
+"%0ATotal: ₹"+total+
+"%0A%0AName: "+encodeURIComponent(name)+
+"%0APhone: "+encodeURIComponent(phone)+
+"%0AAddress: "+encodeURIComponent(address);
+
+
+// Temporary WhatsApp share link
+window.open(
+"https://wa.me/?text="+message,
+"_blank"
+);
+
+}
+
+
+show();
+
+render();
+
 </script>
+
 </body>
-</html>
+  </html>
