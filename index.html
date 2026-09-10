@@ -450,6 +450,14 @@ handmade <i>by umra</i>
 <div id="items"></div>
 
 <h3>
+Subtotal: ₹<span id="subtotal">0</span>
+</h3>
+
+<h3>
+Shipping: ₹<span id="shipping">49</span>
+</h3>
+
+<h3>
 Total: ₹<span id="total">0</span>
 </h3>
 
@@ -569,9 +577,9 @@ image:"flowerpot_hanger.jpg"
   ];
      
   let cart=[];
+const SHIPPING = 49;
 
-
-function show(category="all"){
+  function show(category="all"){
 
 let list=products.filter(
 p=>category==="all" || p.category===category
@@ -744,8 +752,9 @@ Remove
 }).join("");
 
 
-document.getElementById("total").textContent=total;
-
+document.getElementById("subtotal").textContent=total;
+document.getElementById("shipping").textContent=SHIPPING;
+document.getElementById("total").textContent=total+SHIPPING;
 }
 
 
