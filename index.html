@@ -778,7 +778,11 @@ function order(){
 
 if(cart.length===0){
 
-alert("Your bag is empty.");
+showOrderPopup(
+"Your bag is empty ♡",
+"",
+""
+);
 
 return;
 
@@ -796,7 +800,11 @@ document.getElementById("address").value.trim();
 
 if(!name || !phone || !address){
 
-alert("Please fill your name, phone number and address.");
+showOrderPopup(
+"Almost there ♡",
+"Please fill your name, phone number and address.",
+""
+);
 
 return;
 
@@ -818,9 +826,50 @@ let p=products[item.index];
 
 orderDetails+=
 p.name+" × "+item.qty+
-" = ₹"+(p.price*item.qty)+"\n";
+" — ₹"+(p.price*item.qty)+
+"<br>";
 
 });
+
+
+document.getElementById("thankYou").innerHTML=
+"Thank you, "+name+"! ✨";
+
+
+document.getElementById("orderSummary").innerHTML=
+orderDetails+
+"<hr>"+
+"Subtotal: ₹"+total+
+"<br>Shipping: ₹"+SHIPPING+
+"<br><span class='order-total'>Total: ₹"+(total+SHIPPING)+"</span>";
+
+
+document.getElementById("orderPopup")
+.classList.add("show");
+
+}
+
+
+function showOrderPopup(title,message,summary){
+
+document.getElementById("thankYou").innerHTML=
+message || title;
+
+document.getElementById("orderSummary").innerHTML=
+summary || "";
+
+document.getElementById("orderPopup")
+.classList.add("show");
+
+}
+
+
+function closeOrderPopup(){
+
+document.getElementById("orderPopup")
+.classList.remove("show");
+
+  }
 
 
 alert(
@@ -842,5 +891,25 @@ render();
 
 </script>
 
+  <div id="orderPopup" class="order-popup">
+
+<div class="order-box">
+
+<h2>♡ Order Confirmed!</h2>
+
+<p id="thankYou"></p>
+
+<div id="orderSummary" class="order-summary"></div>
+
+<p>Payment: <strong>Cash on Delivery</strong></p>
+
+<button class="popup-btn" onclick="closeOrderPopup()">
+Continue Shopping ♡
+</button>
+
+</div>
+
+  </div>
+  
 </body>
   </html>
