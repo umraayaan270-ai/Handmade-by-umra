@@ -333,6 +333,65 @@ padding:35px 25px;
     margin:auto;
   }
   }
+
+  .order-popup{
+position:fixed;
+inset:0;
+background:#0005;
+display:none;
+align-items:center;
+justify-content:center;
+z-index:100;
+padding:20px;
+}
+
+.order-popup.show{
+display:flex;
+}
+
+.order-box{
+background:#fffaf6;
+width:min(380px,100%);
+padding:30px 25px;
+border-radius:24px;
+text-align:center;
+box-shadow:0 10px 40px #0002;
+}
+
+.order-box h2{
+font:32px Georgia,serif;
+margin:0 0 8px;
+}
+
+.order-box p{
+color:#756b64;
+line-height:1.6;
+margin:8px 0;
+}
+
+.order-summary{
+text-align:left;
+background:#f1e8df;
+padding:16px;
+border-radius:14px;
+margin:18px 0;
+line-height:1.7;
+}
+
+.order-total{
+font-weight:bold;
+font-size:18px;
+}
+
+.popup-btn{
+border:0;
+background:#302925;
+color:white;
+border-radius:30px;
+padding:13px 22px;
+cursor:pointer;
+font-size:15px;
+  }
   
 </style>
 </head>
@@ -868,19 +927,6 @@ function closeOrderPopup(){
 
 document.getElementById("orderPopup")
 .classList.remove("show");
-
-  }
-
-
-alert(
-"Order placed successfully! ♡\n\n"+
-"Thank you, "+name+"!\n\n"+
-orderDetails+
-"\nSubtotal: ₹"+total+
-"\nShipping: ₹"+SHIPPING+
-"\nTotal: ₹"+(total+SHIPPING)+
-"\n\nPayment: Cash on Delivery"
-);
 
   }
 
