@@ -531,7 +531,7 @@ Total: ₹<span id="total">0</span>
 <textarea id="address" rows="4"
 placeholder="Delivery address"></textarea>
 
-<button class="btn" onclick="order()">
+<button type="button" class="btn" onclick="order()">
 Place Your Order ♡
 </button>
 
@@ -965,26 +965,6 @@ showOrderPopup(
 }
 
   }
-
-function closeOrderPopup(){
-
-document.getElementById("orderPopup")
-.classList.remove("show");
-
-  }
-  function showOrderPopup(title, message, summary){
-
-document.getElementById("thankYou").innerHTML =
-title;
-
-document.getElementById("orderSummary").innerHTML =
-message || summary || "";
-
-document.getElementById("orderPopup")
-.classList.add("show");
-
-}
-
 
 function closeOrderPopup(){
 
