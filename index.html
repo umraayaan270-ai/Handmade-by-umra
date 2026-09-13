@@ -972,8 +972,28 @@ document.getElementById("orderPopup")
 .classList.remove("show");
 
   }
-  
-show();
+  function showOrderPopup(title, message, summary){
+
+document.getElementById("thankYou").innerHTML =
+title;
+
+document.getElementById("orderSummary").innerHTML =
+message || summary || "";
+
+document.getElementById("orderPopup")
+.classList.add("show");
+
+}
+
+
+function closeOrderPopup(){
+
+document.getElementById("orderPopup")
+.classList.remove("show");
+
+  }
+
+  show();
 
 render();
 
