@@ -832,8 +832,7 @@ document.getElementById("cart")
 
 }
 
-
-function order(){
+async function order(){
 
 if(cart.length===0){
 
@@ -847,13 +846,13 @@ return;
 
 }
 
-let name=
+let name =
 document.getElementById("name").value.trim();
 
-let phone=
+let phone =
 document.getElementById("phone").value.trim();
 
-let address=
+let address =
 document.getElementById("address").value.trim();
 
 
@@ -870,66 +869,102 @@ return;
 }
 
 
-let total=cart.reduce(
+let total = cart.reduce(
 (sum,item)=>
-sum+products[item.index].price*item.qty,
+sum + products[item.index].price * item.qty,
 0
 );
 
 
-let orderDetails="";
+let orderDetails = "";
 
 cart.forEach(item=>{
 
-let p=products[item.index];
+let p = products[item.index];
 
-orderDetails+=
-p.name+" × "+item.qty+
-" — ₹"+(p.price*item.qty)+
-"<br>";
+orderDetails +=
+p.name + " × " + item.qty +
+" — ₹" + (p.price * item.qty) +
+"\n";
 
 });
 
 
+let finalTotal = total + SHIPPING;
+
+
+let formData = new FormData();
+
+formData.append("Name", name);
+formData.append("Phone", phone);
+formData.append("Address", address);
+formData.append("Order Details", orderDetails);
+formData.append("Subtotal", "₹" + total);
+formData.append("Shipping", "₹" + SHIPPING);
+formData.append("Total", "₹" + finalTotal);
+formData.append("Payment", "Cash on Delivery");
+
+
+try{
+
+let response = await fetch(
+"https://formspree.io/f/xppzevq",
+{
+method:"POST",
+body:formData,
+headers:{
+"Accept":"application/json"
+}
+}
+);
+
+
+if(response.ok){
+
 document.getElementById("thankYou").innerHTML=
-"Thank you, "+name+"! ✨";
+"Thank you, " + name + "! ✨";
 
 
 document.getElementById("orderSummary").innerHTML=
-orderDetails+
+orderDetails.replace(/\n/g,"<br>")+
 "<hr>"+
 "Subtotal: ₹"+total+
 "<br>Shipping: ₹"+SHIPPING+
-"<br><span class='order-total'>Total: ₹"+(total+SHIPPING)+"</span>";
+"<br><span class='order-total'>Total: ₹"+finalTotal+"</span>";
 
 
 document.getElementById("orderPopup")
 .classList.add("show");
 
+cart=[];
+
+render();
+
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("address").value="";
+
+}else{
+
+showOrderPopup(
+"Oops ♡",
+"Your order could not be sent. Please try again.",
+""
+);
+
 }
 
+}catch(error){
 
-function showOrderPopup(title,message,summary){
-
-document.getElementById("thankYou").innerHTML=
-message || title;
-
-document.getElementById("orderSummary").innerHTML=
-summary || "";
-
-document.getElementById("orderPopup")
-.classList.add("show");
+showOrderPopup(
+"Oops ♡",
+"Something went wrong. Please try again.",
+""
+);
 
 }
-
-
-function closeOrderPopup(){
-
-document.getElementById("orderPopup")
-.classList.remove("show");
 
   }
-
 
 show();
 
